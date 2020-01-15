@@ -218,42 +218,23 @@ const model = {
 	},
 
 	saveData: function(){
-		const recipientSurname = document.getElementById('RecipientSurname');
-		const recipientSurnameInput = recipientSurname.lastChild;
-		
+		const form = document.getElementById('form');
+		const inputedDatas = form.getElementsByTagName('input');
+		const [surname, name, fathername, phone, , , city, posteOfficeNumber, posteOfficeAdress] = inputedDatas;
 
-		const recipientName = document.getElementById('RecipientName');
-		const recipientNameInput = recipientName.lastChild;
-		
-		const recipientFathername = document.getElementById('RecipientFathername');
-		const recipientFathernameInput = recipientFathername.lastChild;
-		
-		const recipientPhoneNumber = document.getElementById('RecipientPhoneNumber');
-		const recipientPhoneNumberInput = recipientPhoneNumber.lastChild;
-
-		const firstCheckBox = document.getElementById('firstCheckBox');
-
-		const secondCheckBox = document.getElementById('secondCheckBox');
-
-		const recipientCity = document.getElementById('RecipientCity');
-		const recipientCityInput = recipientCity.lastChild;
-
-		const posteOfficeNumber = document.getElementById('PosteOfficeNumber');
-		const posteOfficeNumberInput = posteOfficeNumber.lastChild;
-		
-		const posteOfficeAdress = document.getElementById('PosteOfficeAdress');
-		const posteOfficeAdressInput = posteOfficeAdress.lastChild;
+		const checkboxes = form.querySelectorAll('.checkbox');
+		const [firstCheckBox, secondCheckBox] = checkboxes;
 
 		model.customerData.user = {
-			surname: recipientSurnameInput.value,
-			name: recipientNameInput.value,
-			fathername: recipientFathernameInput.value,
-			phone: recipientPhoneNumberInput.value,
+			surname: surname.value,
+			name: name.value,
+			fathername: fathername.value,
+			phone: phone.value,
 			transiteOne: firstCheckBox.getAttribute('checked'),
 			transiteTwo: secondCheckBox.getAttribute('checked'),
-			city: recipientCityInput.value,
-			posteOfficeNumber: posteOfficeNumberInput.value,
-			posteOfficeAdress: posteOfficeAdressInput.value,
+			city: city.value,
+			posteOfficeNumber: posteOfficeNumber.value,
+			posteOfficeAdress: posteOfficeAdress.value,
 		}
 
 		console.log(model.customerData.user);
@@ -348,16 +329,10 @@ const view = {
 
 		for (let checkbox of checkBoxes) {
 			checkbox.checked = false;
+			checkbox.setAttribute('checked', '');
 		}
 
 	},
-
-	// formBorderRed: function(elem) {
-	// 	// const targetObj = document.getElementById(id);
-	// 	// const targInput = targetObj.lastChild;
-	// 	// elem.classList.add('borderRed');
-	// 	// let classDelete = setTimeout(() => targInput.classList.remove('borderRed'), 5000)
-	// }
 
 }
 function contentRendering() {
