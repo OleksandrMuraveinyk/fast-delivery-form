@@ -1,6 +1,6 @@
 const view = {
 	deliveryFormComponents: {
-		Title: function(title) {
+		title: function(title) {
 			const form = document.getElementById('form');
 			const formTitle = document.createElement('div');
 			
@@ -9,7 +9,7 @@ const view = {
 			formTitle.innerHTML = title;
 		},
 
-		FormRow: function(id) {
+		formRow: function(id) {
 			const form = document.getElementById('form');
 			const formRow = document.createElement('div');
 			
@@ -18,7 +18,7 @@ const view = {
 			formRow.setAttribute('id', id);
 		},
 
-		FormRowName: function(parentId, nameOfFormRow) {
+		formRowName: function(parentId, nameOfFormRow) {
 			const parent = document.getElementById(parentId);
 			const formRowName = document.createElement('span');
 
@@ -27,7 +27,7 @@ const view = {
 			formRowName.innerHTML = nameOfFormRow;
 		},
 
-		FormRowInput: function(parentId, ...className) {
+		formRowInput: function(parentId, ...className) {
 			const parent = document.getElementById(parentId);
 			const formRowInput = document.createElement('input');
 
@@ -35,7 +35,7 @@ const view = {
 			parent.insertAdjacentElement('beforeend', formRowInput);
 		},
 
-		FormRowAttentionNotification: function(parentId) {
+		formRowAttentionNotification: function(parentId) {
 			const parent = document.getElementById(parentId);
 			const attentionNotification = document.createElement('a');
 
@@ -45,7 +45,7 @@ const view = {
 			attentionNotification.classList.add('form__attentionNotification');
 		},
 
-		FormRowFakeAttentionNotification: function(parentId) {
+		formRowFakeAttentionNotification: function(parentId) {
 			const parent = document.getElementById(parentId);
 			const attentionNotification = document.createElement('a');
 
@@ -55,7 +55,7 @@ const view = {
 			attentionNotification.classList.add('form__fakeAttentionNotification');
 		},
 
-		FormRowDeliveryTypeCheck: function(parentId, rowName, checkBoxOneName, checkBoxTwoName){
+		formRowDeliveryTypeCheck: function(parentId, rowName, checkBoxOneName, checkBoxTwoName){
 			const parent = document.getElementById(parentId);
 			const checkTitle = document.createElement('div');
 			const firstCheckBox = document.createElement('input');
@@ -88,7 +88,7 @@ const view = {
 			secondLable.innerHTML = checkBoxTwoName;
 		},
 
-		ClearButton: function(parentId, name){
+		clearButton: function(parentId, name){
 			const parent = document.getElementById(parentId);
 			const clearButton = document.createElement('button');
 
@@ -97,7 +97,7 @@ const view = {
 			clearButton.innerHTML = name;
 		},
 
-		SubmitButton: function(parentId, name){
+		submitButton: function(parentId, name){
 			const parent = document.getElementById(parentId);
 			const submitButton = document.createElement('button');
 
@@ -109,71 +109,71 @@ const view = {
 
 	renderingElements: {
 		renderingFormTitle: function(){
-			view.deliveryFormComponents.Title('Заполните данные для отправки');
+			view.deliveryFormComponents.title('Заполните данные для отправки');
 		},
 
 		renderingRecipientSurname: function(){
-			view.deliveryFormComponents.FormRow('RecipientSurname');
-			view.deliveryFormComponents.FormRowName('RecipientSurname', 'Фамилия получателя');
-			view.deliveryFormComponents.FormRowInput('RecipientSurname', 'isFilled', 'isNumeric');
-			view.deliveryFormComponents.FormRowAttentionNotification('RecipientSurname');
+			view.deliveryFormComponents.formRow('RecipientSurname');
+			view.deliveryFormComponents.formRowName('RecipientSurname', model.rowsTitles[0]);
+			view.deliveryFormComponents.formRowInput('RecipientSurname', 'isFilled', 'isNumeric');
+			view.deliveryFormComponents.formRowAttentionNotification('RecipientSurname');
 		},
 
 		renderingRecipientName: function(){
-			view.deliveryFormComponents.FormRow('RecipientName');
-			view.deliveryFormComponents.FormRowName('RecipientName', 'Имя получателя');
-			view.deliveryFormComponents.FormRowInput('RecipientName', 'isFilled', 'isNumeric');
-			view.deliveryFormComponents.FormRowAttentionNotification('RecipientName');
+			view.deliveryFormComponents.formRow('RecipientName');
+			view.deliveryFormComponents.formRowName('RecipientName', model.rowsTitles[1]);
+			view.deliveryFormComponents.formRowInput('RecipientName', 'isFilled', 'isNumeric');
+			view.deliveryFormComponents.formRowAttentionNotification('RecipientName');
 		},
 
 		renderingRecipientFathername: function(){
-			view.deliveryFormComponents.FormRow('RecipientFathername');
-			view.deliveryFormComponents.FormRowName('RecipientFathername', 'Отчество получателя');
-			view.deliveryFormComponents.FormRowInput('RecipientFathername', 'isNumeric');
-			view.deliveryFormComponents.FormRowFakeAttentionNotification('RecipientFathername');
+			view.deliveryFormComponents.formRow('RecipientFathername');
+			view.deliveryFormComponents.formRowName('RecipientFathername', model.rowsTitles[2]);
+			view.deliveryFormComponents.formRowInput('RecipientFathername', 'isNumeric');
+			view.deliveryFormComponents.formRowFakeAttentionNotification('RecipientFathername');
 		},
 
 		renderingRecipientPhoneNumber: function(){
-			view.deliveryFormComponents.FormRow('RecipientPhoneNumber');
-			view.deliveryFormComponents.FormRowName('RecipientPhoneNumber', 'Номер телефона');
-			view.deliveryFormComponents.FormRowInput('RecipientPhoneNumber', 'isFilled');
-			view.deliveryFormComponents.FormRowAttentionNotification('RecipientPhoneNumber');
+			view.deliveryFormComponents.formRow('RecipientPhoneNumber');
+			view.deliveryFormComponents.formRowName('RecipientPhoneNumber', model.rowsTitles[3]);
+			view.deliveryFormComponents.formRowInput('RecipientPhoneNumber', 'isFilled');
+			view.deliveryFormComponents.formRowAttentionNotification('RecipientPhoneNumber');
 		},
 
 		renderingTypeOfDelivery: function(){
-			view.deliveryFormComponents.FormRow('TypeOfDelivery');
-			view.deliveryFormComponents.FormRowDeliveryTypeCheck('TypeOfDelivery', 'Выберите способ доставки', 'Использовать транзитный счет1', 'Использовать транзитный счет2');
+			view.deliveryFormComponents.formRow('TypeOfDelivery');
+			view.deliveryFormComponents.formRowDeliveryTypeCheck('TypeOfDelivery', model.rowsTitles[4], model.rowsTitles[5], model.rowsTitles[6]);
 		},
 
 		renderingCity: function(){
-			view.deliveryFormComponents.FormRow('RecipientCity');
-			view.deliveryFormComponents.FormRowName('RecipientCity', 'Город');
-			view.deliveryFormComponents.FormRowInput('RecipientCity', 'isFilled');
-			view.deliveryFormComponents.FormRowAttentionNotification('RecipientCity');
+			view.deliveryFormComponents.formRow('RecipientCity');
+			view.deliveryFormComponents.formRowName('RecipientCity', model.rowsTitles[7]);
+			view.deliveryFormComponents.formRowInput('RecipientCity', 'isFilled');
+			view.deliveryFormComponents.formRowAttentionNotification('RecipientCity');
 		},
 
 		renderingPosteOfficeNumber: function(){
-			view.deliveryFormComponents.FormRow('PosteOfficeNumber');
-			view.deliveryFormComponents.FormRowName('PosteOfficeNumber', 'Номер отделения');
-			view.deliveryFormComponents.FormRowInput('PosteOfficeNumber', 'isFilled');
-			view.deliveryFormComponents.FormRowAttentionNotification('PosteOfficeNumber');
+			view.deliveryFormComponents.formRow('PosteOfficeNumber');
+			view.deliveryFormComponents.formRowName('PosteOfficeNumber', model.rowsTitles[8]);
+			view.deliveryFormComponents.formRowInput('PosteOfficeNumber', 'isFilled');
+			view.deliveryFormComponents.formRowAttentionNotification('PosteOfficeNumber');
 
 		},
 
 		renderingPosteOfficeAdress: function(){
-			view.deliveryFormComponents.FormRow('PosteOfficeAdress');
-			view.deliveryFormComponents.FormRowName('PosteOfficeAdress', 'Адрес отделения');
-			view.deliveryFormComponents.FormRowInput('PosteOfficeAdress', 'isFilled');
-			view.deliveryFormComponents.FormRowAttentionNotification('PosteOfficeAdress');
+			view.deliveryFormComponents.formRow('PosteOfficeAdress');
+			view.deliveryFormComponents.formRowName('PosteOfficeAdress', model.rowsTitles[9]);
+			view.deliveryFormComponents.formRowInput('PosteOfficeAdress', 'isFilled');
+			view.deliveryFormComponents.formRowAttentionNotification('PosteOfficeAdress');
 		},
 
 		renderingClearBotton: function() {
-			view.deliveryFormComponents.FormRow('buttonRow');
-			view.deliveryFormComponents.ClearButton('buttonRow', 'Отменить');
+			view.deliveryFormComponents.formRow('buttonRow');
+			view.deliveryFormComponents.clearButton('buttonRow', 'Отменить');
 		},
 
 		renderingSubmitBotton: function() {
-			view.deliveryFormComponents.SubmitButton('buttonRow', 'Сохранить');
+			view.deliveryFormComponents.submitButton('buttonRow', 'Сохранить');
 		},
 	},
 
