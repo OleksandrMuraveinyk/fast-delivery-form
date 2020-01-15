@@ -198,10 +198,6 @@ const model = {
 		for (let elem of errorsArr) {
 			model.borderIsRed(elem);
 		}
-		const redBordered = document.querySelectorAll('.borderRed');
-		for (let elem of redBordered) {
-			model.borderTimeout(elem);
-		}
 	},
 
 	checkingIsNumeric: function() {
@@ -215,15 +211,13 @@ const model = {
 		for (let elem of errorsArr) {
 			model.borderIsRed(elem);
 		}
-		const redBordered = document.querySelectorAll('.borderRed');
-		for (let elem of redBordered) {
-			model.borderTimeout(elem);
-		}
 	},
 
 	checkBeforeSave: function() {
+		clearTimeout(model.classDelete);
 		model.checkingIsEmpty();
 		model.checkingIsNumeric();
+		model.borderTimeout();
 	},
 
 	preventDefault: function (event) {
@@ -259,8 +253,12 @@ const model = {
 	},
 
 	borderTimeout: function(elem) {
-		clearTimeout(model.classDelete);
-		elem.classDelete =  setTimeout(() => elem.classList.remove('borderRed'), 5000);
+		model.classDelete = setTimeout(() => {
+	    const redBordered = document.querySelectorAll('.borderRed');
+	    	for (let elem of redBordered) {
+	    		elem.classList.remove('borderRed')
+	    	}
+	    }, 5000);
 	},
 
 	classDelete: null,
