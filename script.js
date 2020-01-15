@@ -169,7 +169,7 @@ const model = {
 	postOfficeNumberOnblur: function(){
 		const numberRow = document.getElementById('PosteOfficeNumber');
 		const thePostOfficeNumber = numberRow.lastChild;
-		thePostOfficeNumber.setAttribute('onblur', 'model.postOfficeAddressParsing()');
+		thePostOfficeNumber.setAttribute('onchange', 'model.postOfficeAddressParsing()');
 	},
 
 	postOfficeAddressParsing: function(){
@@ -179,10 +179,10 @@ const model = {
 		const addressRow = document.getElementById('PosteOfficeAdress');
 		const autofillingElem = addressRow.lastChild;
 
-		if (thePostOfficeNumberValue > model.postOfficeData.length){
-			autofillingElem.value = 'проверьте номер указаного отделения';
-		} else {
+		if (thePostOfficeNumberValue <= model.postOfficeData.length && thePostOfficeNumberValue > 1){
 			autofillingElem.value = model.postOfficeData[+thePostOfficeNumberValue-1].address;
+		} else {
+			autofillingElem.value = 'проверьте номер указаного отделения';
 		}
 
 	},
@@ -293,7 +293,7 @@ const model = {
 			posteOfficeNumber: posteOfficeNumberInput.value,
 			posteOfficeAdress: posteOfficeAdressInput.value,
 		}
-		
+
 		console.log(model.customerData.user);
 		
 	},
