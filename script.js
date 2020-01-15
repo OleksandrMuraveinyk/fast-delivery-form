@@ -194,22 +194,30 @@ const model = {
 			if (elem.value === '') {
 				errorsArr.push(elem);
 			}
-
 		}
 		for (let elem of errorsArr) {
 			model.borderIsRed(elem);
 		}
-
-		
-
+		const redBordered = document.querySelectorAll('.borderRed');
+		for (let elem of redBordered) {
+			model.borderTimeout(elem);
+		}
 	},
 
 	checkingIsNumeric: function() {
 		const mustBeLateric = document.getElementsByClassName('isNumeric');
+		let errorsArr = [];
 		for (let elem of mustBeLateric) {
 			if (/[0-9]/.test(elem.value)) {
-				model.borderIsRed(elem);	
+				errorsArr.push(elem);	
 			}
+		}
+		for (let elem of errorsArr) {
+			model.borderIsRed(elem);
+		}
+		const redBordered = document.querySelectorAll('.borderRed');
+		for (let elem of redBordered) {
+			model.borderTimeout(elem);
 		}
 	},
 
@@ -248,8 +256,11 @@ const model = {
 
 	borderIsRed: function(elem) {
 		elem.classList.add('borderRed');
+	},
+
+	borderTimeout: function(elem) {
 		clearTimeout(model.classDelete);
-		model.classDelete =  setTimeout(() => elem.classList.remove('borderRed'), 5000);
+		elem.classDelete =  setTimeout(() => elem.classList.remove('borderRed'), 5000);
 	},
 
 	classDelete: null,
