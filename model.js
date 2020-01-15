@@ -48,6 +48,7 @@ const model = {
 	},
 
 	saveData: function(){
+		controller.checkBeforeSave();
 		const form = document.getElementById('form');
 		const [surname, name, fathername, phone, , , city, posteOfficeNumber, posteOfficeAdress] = form.getElementsByTagName('input');
 		const [firstCheckBox, secondCheckBox] = form.querySelectorAll('.checkbox');
