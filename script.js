@@ -39,6 +39,115 @@ const model = {
 	customerData: {
 
 	},
+	
+	postOfficeAddressDisabling: function(){
+		const addressRow = document.getElementById('PosteOfficeAdress');
+		const disabledElem = addressRow.lastChild;
+		disabledElem.setAttribute('disabled', 'disabled');
+
+	},
+
+	postOfficeNumberOnchange: function(){
+		const numberRow = document.getElementById('PosteOfficeNumber');
+		const thePostOfficeNumber = numberRow.lastChild;
+		thePostOfficeNumber.setAttribute('onchange', 'model.postOfficeAddressParsing()');
+	},
+
+	postOfficeAddressParsing: function(){
+		const numberRow = document.getElementById('PosteOfficeNumber');
+		const thePostOfficeNumber = numberRow.lastChild;
+		const thePostOfficeNumberValue = thePostOfficeNumber.value;
+		const addressRow = document.getElementById('PosteOfficeAdress');
+		const autofillingElem = addressRow.lastChild;
+
+		if (thePostOfficeNumberValue <= model.postOfficeData.length && thePostOfficeNumberValue > 1){
+			autofillingElem.value = model.postOfficeData[+thePostOfficeNumberValue-1].address;
+		} else {
+			autofillingElem.value = 'проверьте номер указаного отделения';
+		}
+
+	},
+
+	checkingIsEmpty: function(){
+		const mustBeFilledElements = document.getElementsByClassName('isFilled');
+		let errorsArr = [];
+		for (let elem of mustBeFilledElements) {
+			if (elem.value === '') {
+				errorsArr.push(elem);
+			}
+		}
+		for (let elem of errorsArr) {
+			model.borderIsRed(elem);
+		}
+	},
+
+	checkingIsNumeric: function() {
+		const mustBeLateric = document.getElementsByClassName('isNumeric');
+		let errorsArr = [];
+		for (let elem of mustBeLateric) {
+			if (/[0-9]/.test(elem.value)) {
+				errorsArr.push(elem);	
+			}
+		}
+		for (let elem of errorsArr) {
+			model.borderIsRed(elem);
+		}
+	},
+
+	checkBeforeSave: function() {
+		clearTimeout(model.classDelete);
+		model.checkingIsEmpty();
+		model.checkingIsNumeric();
+		model.borderTimeout();
+	},
+
+	preventDefault: function (event) {
+		event.preventDefault();
+	},
+
+	saveData: function(){
+		const form = document.getElementById('form');
+		const inputedDatas = form.getElementsByTagName('input');
+		const [surname, name, fathername, phone, , , city, posteOfficeNumber, posteOfficeAdress] = inputedDatas;
+
+		const checkboxes = form.querySelectorAll('.checkbox');
+		const [firstCheckBox, secondCheckBox] = checkboxes;
+
+		model.customerData.user = {
+			surname: surname.value,
+			name: name.value,
+			fathername: fathername.value,
+			phone: phone.value,
+			transiteOne: firstCheckBox.getAttribute('checked'),
+			transiteTwo: secondCheckBox.getAttribute('checked'),
+			city: city.value,
+			posteOfficeNumber: posteOfficeNumber.value,
+			posteOfficeAdress: posteOfficeAdress.value,
+		}
+
+		console.log(model.customerData.user);
+		
+	},
+
+	borderIsRed: function(elem) {
+		elem.classList.add('borderRed');
+	},
+
+	borderTimeout: function(elem) {
+		model.classDelete = setTimeout(() => {
+	    const redBordered = document.querySelectorAll('.borderRed');
+	    	for (let elem of redBordered) {
+	    		elem.classList.remove('borderRed')
+	    	}
+	    }, 5000);
+	},
+
+	classDelete: null,
+}
+
+//-------------view-------------
+
+const view = {
 
 	deliveryFormComponents: {
 		
@@ -159,181 +268,73 @@ const model = {
 
 	},
 
-	postOfficeAddressDisabling: function(){
-		const addressRow = document.getElementById('PosteOfficeAdress');
-		const disabledElem = addressRow.lastChild;
-		disabledElem.setAttribute('disabled', 'disabled');
-
-	},
-
-	postOfficeNumberOnblur: function(){
-		const numberRow = document.getElementById('PosteOfficeNumber');
-		const thePostOfficeNumber = numberRow.lastChild;
-		thePostOfficeNumber.setAttribute('onchange', 'model.postOfficeAddressParsing()');
-	},
-
-	postOfficeAddressParsing: function(){
-		const numberRow = document.getElementById('PosteOfficeNumber');
-		const thePostOfficeNumber = numberRow.lastChild;
-		const thePostOfficeNumberValue = thePostOfficeNumber.value;
-		const addressRow = document.getElementById('PosteOfficeAdress');
-		const autofillingElem = addressRow.lastChild;
-
-		if (thePostOfficeNumberValue <= model.postOfficeData.length && thePostOfficeNumberValue > 1){
-			autofillingElem.value = model.postOfficeData[+thePostOfficeNumberValue-1].address;
-		} else {
-			autofillingElem.value = 'проверьте номер указаного отделения';
-		}
-
-	},
-
-	checkingIsEmpty: function(){
-		const mustBeFilledElements = document.getElementsByClassName('isFilled');
-		let errorsArr = [];
-		for (let elem of mustBeFilledElements) {
-			if (elem.value === '') {
-				errorsArr.push(elem);
-			}
-		}
-		for (let elem of errorsArr) {
-			model.borderIsRed(elem);
-		}
-	},
-
-	checkingIsNumeric: function() {
-		const mustBeLateric = document.getElementsByClassName('isNumeric');
-		let errorsArr = [];
-		for (let elem of mustBeLateric) {
-			if (/[0-9]/.test(elem.value)) {
-				errorsArr.push(elem);	
-			}
-		}
-		for (let elem of errorsArr) {
-			model.borderIsRed(elem);
-		}
-	},
-
-	checkBeforeSave: function() {
-		clearTimeout(model.classDelete);
-		model.checkingIsEmpty();
-		model.checkingIsNumeric();
-		model.borderTimeout();
-	},
-
-	preventDefault: function (event) {
-		event.preventDefault();
-	},
-
-	saveData: function(){
-		const form = document.getElementById('form');
-		const inputedDatas = form.getElementsByTagName('input');
-		const [surname, name, fathername, phone, , , city, posteOfficeNumber, posteOfficeAdress] = inputedDatas;
-
-		const checkboxes = form.querySelectorAll('.checkbox');
-		const [firstCheckBox, secondCheckBox] = checkboxes;
-
-		model.customerData.user = {
-			surname: surname.value,
-			name: name.value,
-			fathername: fathername.value,
-			phone: phone.value,
-			transiteOne: firstCheckBox.getAttribute('checked'),
-			transiteTwo: secondCheckBox.getAttribute('checked'),
-			city: city.value,
-			posteOfficeNumber: posteOfficeNumber.value,
-			posteOfficeAdress: posteOfficeAdress.value,
-		}
-
-		console.log(model.customerData.user);
-		
-	},
-
-	borderIsRed: function(elem) {
-		elem.classList.add('borderRed');
-	},
-
-	borderTimeout: function(elem) {
-		model.classDelete = setTimeout(() => {
-	    const redBordered = document.querySelectorAll('.borderRed');
-	    	for (let elem of redBordered) {
-	    		elem.classList.remove('borderRed')
-	    	}
-	    }, 5000);
-	},
-
-	classDelete: null,
-}
-
-//-------------view-------------
-
-const view = {
 	renderingElements: {
 		renderingFormTitle: function(){
-			model.deliveryFormComponents.Title('Заполните данные для отправки');
+			view.deliveryFormComponents.Title('Заполните данные для отправки');
 		},
 
 		renderingRecipientSurname: function(){
-			model.deliveryFormComponents.FormRow('RecipientSurname');
-			model.deliveryFormComponents.FormRowName('RecipientSurname', 'Фамилия получателя');
-			model.deliveryFormComponents.FormRowInput('RecipientSurname', 'isFilled', 'isNumeric');
-			model.deliveryFormComponents.FormRowAttentionNotification('RecipientSurname');
+			view.deliveryFormComponents.FormRow('RecipientSurname');
+			view.deliveryFormComponents.FormRowName('RecipientSurname', 'Фамилия получателя');
+			view.deliveryFormComponents.FormRowInput('RecipientSurname', 'isFilled', 'isNumeric');
+			view.deliveryFormComponents.FormRowAttentionNotification('RecipientSurname');
 		},
 
 		renderingRecipientName: function(){
-			model.deliveryFormComponents.FormRow('RecipientName');
-			model.deliveryFormComponents.FormRowName('RecipientName', 'Имя получателя');
-			model.deliveryFormComponents.FormRowInput('RecipientName', 'isFilled', 'isNumeric');
-			model.deliveryFormComponents.FormRowAttentionNotification('RecipientName');
+			view.deliveryFormComponents.FormRow('RecipientName');
+			view.deliveryFormComponents.FormRowName('RecipientName', 'Имя получателя');
+			view.deliveryFormComponents.FormRowInput('RecipientName', 'isFilled', 'isNumeric');
+			view.deliveryFormComponents.FormRowAttentionNotification('RecipientName');
 		},
 
 		renderingRecipientFathername: function(){
-			model.deliveryFormComponents.FormRow('RecipientFathername');
-			model.deliveryFormComponents.FormRowName('RecipientFathername', 'Отчество получателя');
-			model.deliveryFormComponents.FormRowInput('RecipientFathername', 'isNumeric');
-			model.deliveryFormComponents.FormRowFakeAttentionNotification('RecipientFathername');
+			view.deliveryFormComponents.FormRow('RecipientFathername');
+			view.deliveryFormComponents.FormRowName('RecipientFathername', 'Отчество получателя');
+			view.deliveryFormComponents.FormRowInput('RecipientFathername', 'isNumeric');
+			view.deliveryFormComponents.FormRowFakeAttentionNotification('RecipientFathername');
 		},
 
 		renderingRecipientPhoneNumber: function(){
-			model.deliveryFormComponents.FormRow('RecipientPhoneNumber');
-			model.deliveryFormComponents.FormRowName('RecipientPhoneNumber', 'Номер телефона');
-			model.deliveryFormComponents.FormRowInput('RecipientPhoneNumber', 'isFilled');
-			model.deliveryFormComponents.FormRowAttentionNotification('RecipientPhoneNumber');
+			view.deliveryFormComponents.FormRow('RecipientPhoneNumber');
+			view.deliveryFormComponents.FormRowName('RecipientPhoneNumber', 'Номер телефона');
+			view.deliveryFormComponents.FormRowInput('RecipientPhoneNumber', 'isFilled');
+			view.deliveryFormComponents.FormRowAttentionNotification('RecipientPhoneNumber');
 		},
 
 		renderingTypeOfDelivery: function(){
-			model.deliveryFormComponents.FormRow('TypeOfDelivery');
-			model.deliveryFormComponents.FormRowDeliveryTypeCheck('TypeOfDelivery', 'Выберите способ доставки', 'Использовать транзитный счет1', 'Использовать транзитный счет2');
+			view.deliveryFormComponents.FormRow('TypeOfDelivery');
+			view.deliveryFormComponents.FormRowDeliveryTypeCheck('TypeOfDelivery', 'Выберите способ доставки', 'Использовать транзитный счет1', 'Использовать транзитный счет2');
 		},
 
 		renderingCity: function(){
-			model.deliveryFormComponents.FormRow('RecipientCity');
-			model.deliveryFormComponents.FormRowName('RecipientCity', 'Город');
-			model.deliveryFormComponents.FormRowInput('RecipientCity', 'isFilled');
-			model.deliveryFormComponents.FormRowAttentionNotification('RecipientCity');
+			view.deliveryFormComponents.FormRow('RecipientCity');
+			view.deliveryFormComponents.FormRowName('RecipientCity', 'Город');
+			view.deliveryFormComponents.FormRowInput('RecipientCity', 'isFilled');
+			view.deliveryFormComponents.FormRowAttentionNotification('RecipientCity');
 		},
 
 		renderingPosteOfficeNumber: function(){
-			model.deliveryFormComponents.FormRow('PosteOfficeNumber');
-			model.deliveryFormComponents.FormRowName('PosteOfficeNumber', 'Номер отделения');
-			model.deliveryFormComponents.FormRowInput('PosteOfficeNumber', 'isFilled');
-			model.deliveryFormComponents.FormRowAttentionNotification('PosteOfficeNumber');
+			view.deliveryFormComponents.FormRow('PosteOfficeNumber');
+			view.deliveryFormComponents.FormRowName('PosteOfficeNumber', 'Номер отделения');
+			view.deliveryFormComponents.FormRowInput('PosteOfficeNumber', 'isFilled');
+			view.deliveryFormComponents.FormRowAttentionNotification('PosteOfficeNumber');
 
 		},
 
 		renderingPosteOfficeAdress: function(){
-			model.deliveryFormComponents.FormRow('PosteOfficeAdress');
-			model.deliveryFormComponents.FormRowName('PosteOfficeAdress', 'Адрес отделения');
-			model.deliveryFormComponents.FormRowInput('PosteOfficeAdress', 'isFilled');
-			model.deliveryFormComponents.FormRowAttentionNotification('PosteOfficeAdress');
+			view.deliveryFormComponents.FormRow('PosteOfficeAdress');
+			view.deliveryFormComponents.FormRowName('PosteOfficeAdress', 'Адрес отделения');
+			view.deliveryFormComponents.FormRowInput('PosteOfficeAdress', 'isFilled');
+			view.deliveryFormComponents.FormRowAttentionNotification('PosteOfficeAdress');
 		},
 
 		renderingClearBotton: function() {
-			model.deliveryFormComponents.FormRow('buttonRow');
-			model.deliveryFormComponents.ClearButton('buttonRow', 'Отменить');
+			view.deliveryFormComponents.FormRow('buttonRow');
+			view.deliveryFormComponents.ClearButton('buttonRow', 'Отменить');
 		},
 
 		renderingSubmitBotton: function() {
-			model.deliveryFormComponents.SubmitButton('buttonRow', 'Сохранить');
+			view.deliveryFormComponents.SubmitButton('buttonRow', 'Сохранить');
 		},
 
 	},
@@ -372,7 +373,7 @@ function contentRendering() {
 
 function additionalOptionsRendering(){
 	model.postOfficeAddressDisabling();
-	model.postOfficeNumberOnblur();
+	model.postOfficeNumberOnchange();
 };
 
 contentRendering();
