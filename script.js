@@ -189,11 +189,18 @@ const model = {
 
 	checkingIsEmpty: function(){
 		const mustBeFilledElements = document.getElementsByClassName('isFilled');
+		let errorsArr = [];
 		for (let elem of mustBeFilledElements) {
 			if (elem.value === '') {
-				model.borderIsRed(elem);
+				errorsArr.push(elem);
 			}
+
 		}
+		for (let elem of errorsArr) {
+			model.borderIsRed(elem);
+		}
+
+		
 
 	},
 
