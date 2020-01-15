@@ -117,7 +117,7 @@ const model = {
 			firstCheckBox.classList.add('checkbox');
 			
 			const firstLable = document.createElement('label');
-			firstLable.classList.add('label');
+			firstLable.classList.add('label', 'noselect');
 			firstLable.setAttribute('for', 'firstCheckBox');
 			parent.insertAdjacentElement('beforeend', firstCheckBox);
 			parent.insertAdjacentElement('beforeend', firstLable);
@@ -128,7 +128,7 @@ const model = {
 			secondCheckBox.classList.add('checkbox');
 			
 			const secondLable = document.createElement('label');
-			secondLable.classList.add('label');
+			secondLable.classList.add('label', 'noselect');
 			secondLable.setAttribute('for', 'secondCheckBox');
 			parent.insertAdjacentElement('beforeend', secondCheckBox);
 			parent.insertAdjacentElement('beforeend', secondLable);
