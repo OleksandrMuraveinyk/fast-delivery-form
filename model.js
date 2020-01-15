@@ -1,9 +1,5 @@
-
-
-
-
-
-//------------model-------------
+import view from "./view.js";
+import controller from "./controller.js";
 
 const model = {
 	postOfficeData: [ 
@@ -137,4 +133,4 @@ const model = {
 	classDelete: null,
 }
 
-export default model;
+export default model
