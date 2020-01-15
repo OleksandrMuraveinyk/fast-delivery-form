@@ -191,8 +191,7 @@ const model = {
 		const mustBeFilledElements = document.getElementsByClassName('isFilled');
 		for (let elem of mustBeFilledElements) {
 			if (elem.value === '') {
-			elem.classList.add('borderRed');
-			let classDelete = setTimeout(() => elem.classList.remove('borderRed'), 5000);
+				model.borderIsRed(elem);
 			}
 		}
 
@@ -202,8 +201,7 @@ const model = {
 		const mustBeLateric = document.getElementsByClassName('isNumeric');
 		for (let elem of mustBeLateric) {
 			if (/[0-9]/.test(elem.value)) {
-			elem.classList.add('borderRed');
-			let classDelete = setTimeout(() => elem.classList.remove('borderRed'), 5000);	
+				model.borderIsRed(elem);	
 			}
 		}
 	},
@@ -241,6 +239,11 @@ const model = {
 		
 	},
 
+	borderIsRed: function(elem) {
+		elem.classList.add('borderRed');
+		clearTimeout(classDelete);
+		const classDelete = setTimeout(() => elem.classList.remove('borderRed'), 5000);
+	}
 }
 
 //-------------view-------------
