@@ -312,7 +312,6 @@ const view = {
 		},
 
 		renderingSubmitBotton: function() {
-			model.deliveryFormComponents.FormRow('buttonRow');
 			model.deliveryFormComponents.SubmitButton('buttonRow', 'Сохранить');
 		},
 
