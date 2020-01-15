@@ -241,9 +241,11 @@ const model = {
 
 	borderIsRed: function(elem) {
 		elem.classList.add('borderRed');
-		clearTimeout(classDelete);
-		const classDelete = setTimeout(() => elem.classList.remove('borderRed'), 5000);
-	}
+		clearTimeout(model.classDelete);
+		model.classDelete =  setTimeout(() => elem.classList.remove('borderRed'), 5000);
+	},
+
+	classDelete: null,
 }
 
 //-------------view-------------
