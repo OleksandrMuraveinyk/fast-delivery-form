@@ -1,12 +1,5 @@
-import model from "model";
-import view from "view";
-
-
-
-
-
-
-//-------------controller-------------
+import model from "./model.js";
+import view from "./view.js";
 
 const controller = {
 	clearButtonAction: function() {
@@ -59,8 +52,10 @@ const controller = {
 	},
    
 }
-
+view.contentRendering();
 controller.clearButtonAction();
 controller.submitButtonAction();
 controller.checkBoxState();
 controller.additionalOptionsRendering();
+
+export default controller;
