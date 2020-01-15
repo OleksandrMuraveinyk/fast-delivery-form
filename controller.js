@@ -1,4 +1,3 @@
-
 const controller = {
 	clearButtonAction: function() {
 		const rowOfButton = document.getElementById('buttonRow');
@@ -97,12 +96,13 @@ const controller = {
 	},
 
 	borderTimeout: function(elem) {
+		const redBorderDeley = 5000;
 		controller.classDelete = setTimeout(() => {
 	    const redBordered = document.querySelectorAll('.borderRed');
 	    	for (let elem of redBordered) {
 	    		elem.classList.remove('borderRed')
 	    	}
-	    }, 5000);
+	    }, redBorderDeley);
 	},
 
 	classDelete: null,
