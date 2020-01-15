@@ -1,7 +1,5 @@
-
-
-
-//-------------view-------------
+import model from "./model.js"
+import controller from "./controller.js";
 const view = {
 
 	deliveryFormComponents: {
@@ -230,4 +228,4 @@ function contentRendering() {
 
 contentRendering();
 
-export default view;
+export default view
