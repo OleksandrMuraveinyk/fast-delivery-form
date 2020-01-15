@@ -380,7 +380,19 @@ const view = {
 	},
 
 	formClear: function() {
-		document.location.reload(true);
+		const form = document.getElementById('form');
+		const inputs = form.getElementsByTagName('input');
+		const checkBoxes = form.getElementsByClassName('checkbox');
+
+		for (let input of inputs) {
+			input.value = '';
+		}
+
+		for (let checkbox of checkBoxes) {
+			
+			checkbox.checked = false;
+		}
+
 	},
 
 	formBorderRed: function(id) {
@@ -420,6 +432,7 @@ const controller = {
 	clearButtonAction: function() {
 		const rowOfButton = document.getElementById('buttonRow');
 		const targetButton = rowOfButton.firstChild;
+		targetButton.addEventListener('click', model.preventDefault);
 		targetButton.addEventListener('click', view.formClear);
 
 	},
