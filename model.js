@@ -1,4 +1,3 @@
-//---------------------model-------------------
 const model = {
 	postOfficeData: [ 
 		{
@@ -35,6 +34,10 @@ const model = {
 		}
 	],
 // object for keeping of user data after pushing of submitButton
+	rowsTitles: ['Фамилия получателя', 'Имя получателя', 'Отчество получателя', 'Номер телефона', 
+	'Выберите способ доставки', 'Использовать транзитный счет1', 'Использовать транзитный счет2', 
+	'Город', 'Номер отделения', 'Адрес отделения'],
+
 	customerData: {
 	},
 		
@@ -46,12 +49,9 @@ const model = {
 
 	saveData: function(){
 		const form = document.getElementById('form');
-		const inputedDatas = form.getElementsByTagName('input');
-		const [surname, name, fathername, phone, , , city, posteOfficeNumber, posteOfficeAdress] = inputedDatas;
-
-		const checkboxes = form.querySelectorAll('.checkbox');
-		const [firstCheckBox, secondCheckBox] = checkboxes;
-
+		const [surname, name, fathername, phone, , , city, posteOfficeNumber, posteOfficeAdress] = form.getElementsByTagName('input');
+		const [firstCheckBox, secondCheckBox] = form.querySelectorAll('.checkbox');
+		
 		model.customerData.user = {
 			surname: surname.value,
 			name: name.value,
@@ -65,6 +65,4 @@ const model = {
 		}
 		console.log(model.customerData.user);
 	},
-
-	
 }
