@@ -10,14 +10,13 @@ const controller = {
 		const rowOfButton = document.getElementById('buttonRow');
 		const targetButton = rowOfButton.lastChild;
 		targetButton.addEventListener('click', model.preventDefault);
-		targetButton.addEventListener('click', controller.checkBeforeSave);
 		targetButton.addEventListener('click', model.saveData);
 	},
 
 	checkBoxState: function(){
 		const elem = document.getElementById('TypeOfDelivery');
 		elem.onclick = function(event){
-			let target = event.target;
+			const target = event.target;
 			if(target.className != 'checkbox') return;
 			if(!target.getAttribute('checked')) {
 				target.setAttribute('checked', 'checked');
