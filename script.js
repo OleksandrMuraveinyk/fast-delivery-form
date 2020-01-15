@@ -256,8 +256,6 @@ const model = {
 	},
 
 	saveData: function(){
-		const redBorderCheck = document.querySelector('.borderRed');
-
 		const recipientSurname = document.getElementById('RecipientSurname');
 		const recipientSurnameInput = recipientSurname.lastChild;
 		
@@ -284,20 +282,18 @@ const model = {
 		const posteOfficeAdress = document.getElementById('PosteOfficeAdress');
 		const posteOfficeAdressInput = posteOfficeAdress.lastChild;
 
-
-		if (!redBorderCheck) {
-			model.customerData.user = {
-				surname: recipientSurnameInput.value,
-				name: recipientNameInput.value,
-				fathername: recipientFathernameInput.value,
-				phone: recipientPhoneNumberInput.value,
-				transiteOne: firstCheckBox.getAttribute('checked'),
-				transiteTwo: secondCheckBox.getAttribute('checked'),
-				city: recipientCityInput.value,
-				posteOfficeNumber: posteOfficeNumberInput.value,
-				posteOfficeAdress: posteOfficeAdressInput.value,
-			}
+		model.customerData.user = {
+			surname: recipientSurnameInput.value,
+			name: recipientNameInput.value,
+			fathername: recipientFathernameInput.value,
+			phone: recipientPhoneNumberInput.value,
+			transiteOne: firstCheckBox.getAttribute('checked'),
+			transiteTwo: secondCheckBox.getAttribute('checked'),
+			city: recipientCityInput.value,
+			posteOfficeNumber: posteOfficeNumberInput.value,
+			posteOfficeAdress: posteOfficeAdressInput.value,
 		}
+		
 		console.log(model.customerData.user);
 		
 	},
@@ -389,7 +385,6 @@ const view = {
 		}
 
 		for (let checkbox of checkBoxes) {
-			
 			checkbox.checked = false;
 		}
 
