@@ -12,45 +12,51 @@
 }
 
 .form__Title {
+	display: flex;
+	justify-content: center;
 	text-align: center;
 	font-size: 40px;
 	margin-bottom: 2%; 
 }
 
 .form__Row {
-	padding: 0.1%;
+	display: flex;
+	justify-content: space-between;
 	margin: 0.2%;
 	font-size: 20px;
 
 }
 
 .form__RowName {
-	float: left;
+	display: flex;
+	justify-content: flex-start;
 	width: 30%;
 }
 
 .form__RowInput {
+	display: flex;
 	border: 0.1% solid grey;
 	border-radius: 4px; 
 /*	after declaration of border-radius I recived gradient on borders
 */	line-height: 20px;
 	width: 68%;
+	margin-right: 1%;
 	outline:none;
 	
 }
 
 .form__attentionNotification {
-	float: left;
+	display: flex;
 	width: 0.8%;
 	color: red;
 	cursor: help;
 }
 
 .form__fakeAttentionNotification {
-	float: left;
+	display: flex;
+	justify-content: flex-start;
 	width: 0.8%;
 	color: white;
-
 }
 
 .form__checkTitle {
@@ -58,14 +64,9 @@
 	font-size: 20px;
 	margin-bottom: 1%;
 }
-
-/*.lable {
-	
-}
-
 #TypeOfDelivery {
-	
-}*/
+	display: block;
+}
 
 #firstCheckBox{
 	margin-left: 10%;
@@ -77,12 +78,18 @@
 	margin-bottom: 2%;
 }
 
+
+#buttonRow {
+	display: flex;
+	justify-content: flex-end;
+}
+
 .form__clearButton {
-	border: 1 px solid grey;
+	display: flex;
+	justify-content: center;
+	
 	border-radius: 4px;
 	margin-top: 0.2%;
-	padding: 0.1%;
-	margin-left: 30.8%;
 	margin-right: 2%;
 	width: 33%;
 	line-height: 50px;
@@ -91,7 +98,10 @@
 }
 
 .form__submitButton {
-	border: 1 px solid #6C7BBB;
+	display: flex;
+	justify-content: center;
+	margin-right: 1%;
+	
 	border-radius: 4px;
 	color: white;
 	background-color: #6C7BBB;
