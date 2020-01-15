@@ -39,20 +39,7 @@ const model = {
 	customerData: {
 
 	},
-	
-	postOfficeAddressDisabling: function(){
-		const addressRow = document.getElementById('PosteOfficeAdress');
-		const disabledElem = addressRow.lastChild;
-		disabledElem.setAttribute('disabled', 'disabled');
-
-	},
-
-	postOfficeNumberOnchange: function(){
-		const numberRow = document.getElementById('PosteOfficeNumber');
-		const thePostOfficeNumber = numberRow.lastChild;
-		thePostOfficeNumber.setAttribute('onchange', 'model.postOfficeAddressParsing()');
-	},
-
+		
 	postOfficeAddressParsing: function(){
 		const numberRow = document.getElementById('PosteOfficeNumber');
 		const thePostOfficeNumber = numberRow.lastChild;
@@ -371,13 +358,10 @@ function contentRendering() {
 	
 };
 
-function additionalOptionsRendering(){
-	model.postOfficeAddressDisabling();
-	model.postOfficeNumberOnchange();
-};
+
 
 contentRendering();
-additionalOptionsRendering();
+
 
 //-------------controller-------------
 
@@ -410,12 +394,30 @@ const controller = {
 			} else{
 				target.setAttribute('checked', '');
 			}
-			
 		}
+	},
+
+	additionalOptionsRendering: function(){
+		controller.postOfficeAddressDisabling();
+		controller.postOfficeNumberOnchange();
+	},
+
+	postOfficeAddressDisabling: function(){
+		const addressRow = document.getElementById('PosteOfficeAdress');
+		const disabledElem = addressRow.lastChild;
+		disabledElem.setAttribute('disabled', 'disabled');
 
 	},
+
+	postOfficeNumberOnchange: function(){
+		const numberRow = document.getElementById('PosteOfficeNumber');
+		const thePostOfficeNumber = numberRow.lastChild;
+		thePostOfficeNumber.setAttribute('onchange', 'model.postOfficeAddressParsing()');
+	},
+
 }
 
 controller.clearButtonAction();
 controller.submitButtonAction();
 controller.checkBoxState();
+controller.additionalOptionsRendering();
