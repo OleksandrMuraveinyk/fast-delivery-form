@@ -116,8 +116,8 @@ const model = {
 			firstCheckBox.setAttribute('type', 'checkbox');
 			firstCheckBox.classList.add('checkbox');
 			
-			const firstLable = document.createElement('lable');
-			firstLable.classList.add('lable');
+			const firstLable = document.createElement('label');
+			firstLable.classList.add('label');
 			firstLable.setAttribute('for', 'firstCheckBox');
 			parent.insertAdjacentElement('beforeend', firstCheckBox);
 			parent.insertAdjacentElement('beforeend', firstLable);
@@ -127,8 +127,8 @@ const model = {
 			secondCheckBox.setAttribute('type', 'checkbox');
 			secondCheckBox.classList.add('checkbox');
 			
-			const secondLable = document.createElement('lable');
-			secondLable.classList.add('lable');
+			const secondLable = document.createElement('label');
+			secondLable.classList.add('label');
 			secondLable.setAttribute('for', 'secondCheckBox');
 			parent.insertAdjacentElement('beforeend', secondCheckBox);
 			parent.insertAdjacentElement('beforeend', secondLable);
